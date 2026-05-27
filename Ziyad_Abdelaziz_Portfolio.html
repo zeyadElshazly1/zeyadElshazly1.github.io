@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ziyad Abdelaziz — Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Instrument+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ef;
+    --bg2: #edeae4;
+    --ink: #1a1714;
+    --ink2: #4a4540;
+    --ink3: #8a8580;
+    --accent: #1a1714;
+    --rule: #d4d0ca;
+    --tag-bg: #e4e0da;
+    --blue: #2a4a8a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(245,243,239,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--ink3);
+    text-decoration: none;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 4rem 3rem 4rem 3rem;
+    border-right: 1px solid var(--rule);
+  }
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--ink3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(4rem, 7vw, 7.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+  }
+  .hero-name em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink2);
+  }
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--ink2);
+    line-height: 1.75;
+    max-width: 380px;
+    margin-bottom: 2.5rem;
+    border-left: 1px solid var(--rule);
+    padding-left: 1.25rem;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 0;
+    transition: all 0.2s;
+  }
+  .btn-dark { background: var(--ink); color: var(--bg); border: 1px solid var(--ink); }
+  .btn-dark:hover { background: var(--ink2); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--rule); }
+  .btn-ghost:hover { border-color: var(--ink); }
+
+  .hero-right {
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 4rem 3rem;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+    margin-top: auto;
+  }
+  .stat {
+    padding: 1.5rem;
+    background: var(--bg2);
+    border: 1px solid var(--rule);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ink3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .hero-scroll {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ink3);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .hero-scroll::after {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--rule);
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 5rem 3rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-bg { background: var(--bg2); }
+  .section-head {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--rule);
+    align-items: end;
+  }
+  .section-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ink3);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding-top: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .section-title em { font-style: italic; }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--ink2);
+    line-height: 1.85;
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+  }
+  .about-text p strong { color: var(--ink); font-weight: 500; }
+  .about-details { display: flex; flex-direction: column; gap: 0; }
+  .detail-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  .detail-row:first-child { border-top: 1px solid var(--rule); }
+  .detail-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ink3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding-top: 0.15rem;
+  }
+  .detail-value { font-size: 0.9rem; color: var(--ink); }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; }
+  .exp-card {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.2s;
+  }
+  .exp-card:first-child { border-top: 1px solid var(--rule); }
+  .exp-meta {}
+  .exp-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ink3);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+  .exp-loc {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ink3);
+    letter-spacing: 0.06em;
+  }
+  .exp-body {}
+  .exp-top { margin-bottom: 0.75rem; }
+  .exp-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.2rem;
+  }
+  .exp-company {
+    font-size: 0.85rem;
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 400;
+  }
+  .exp-company:hover { text-decoration: underline; }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
+  .exp-bullets li {
+    font-size: 0.9rem;
+    color: var(--ink2);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.65;
+  }
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--rule);
+    font-size: 0.8rem;
+  }
+
+  /* PROJECTS */
+  .project-card {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .project-card:first-child { border-top: 1px solid var(--rule); }
+  .project-index {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--rule);
+    line-height: 1;
+  }
+  .project-body {}
+  .project-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.75rem;
+  }
+  .project-stack {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 0.25rem 0.6rem;
+    background: var(--tag-bg);
+    color: var(--ink2);
+    letter-spacing: 0.06em;
+  }
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--ink2);
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
+    max-width: 580px;
+  }
+  .project-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+  .project-link:hover { color: var(--blue); border-color: var(--blue); }
+
+  /* SKILLS */
+  .skills-table { display: flex; flex-direction: column; }
+  .skill-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 3rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: start;
+  }
+  .skill-row:first-child { border-top: 1px solid var(--rule); }
+  .skill-cat {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ink3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding-top: 0.25rem;
+    line-height: 1.6;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-tag {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.75rem;
+    background: var(--bg);
+    color: var(--ink2);
+    border: 1px solid var(--rule);
+    transition: all 0.15s;
+  }
+  .section-bg .skill-tag { background: var(--bg2); }
+  .skill-tag:hover { border-color: var(--ink); color: var(--ink); }
+
+  /* CERTS */
+  .certs-list { display: flex; flex-direction: column; }
+  .cert-row {
+    display: grid;
+    grid-template-columns: 160px 1fr auto;
+    gap: 3rem;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: center;
+  }
+  .cert-row:first-child { border-top: 1px solid var(--rule); }
+  .cert-year {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--ink3);
+    letter-spacing: 0.08em;
+  }
+  .cert-name-wrap {}
+  .cert-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 0.2rem;
+  }
+  .cert-issuer {
+    font-size: 0.8rem;
+    color: var(--ink3);
+  }
+  .cert-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid;
+  }
+  .cert-badge.done { border-color: #2d7a4a; color: #2d7a4a; }
+  .cert-badge.wip { border-color: #a06d1a; color: #a06d1a; }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .contact-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+  .contact-heading em { font-style: italic; }
+  .contact-sub {
+    color: var(--ink2);
+    font-size: 1rem;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 0; }
+  .contact-link-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+    color: var(--ink);
+    transition: padding-left 0.2s;
+  }
+  .contact-link-row:first-child { border-top: 1px solid var(--rule); }
+  .contact-link-row:hover { padding-left: 0.5rem; }
+  .contact-link-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ink3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .contact-link-val { font-size: 0.9rem; color: var(--blue); }
+  .contact-link-arrow { color: var(--ink3); font-size: 0.8rem; }
+
+  /* FOOTER */
+  footer {
+    padding: 1.5rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--rule);
+  }
+  .footer-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--ink3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { border-right: none; padding: 3rem 1.5rem 2rem; }
+    .hero-right { padding: 2rem 1.5rem; }
+    .section { padding: 3rem 1.5rem; }
+    .section-head, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .exp-card, .project-card, .skill-row, .cert-row { grid-template-columns: 1fr; gap: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Ziyad Abdelaziz</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Data Analyst — Winnipeg, MB</div>
+    <h1 class="hero-name">
+      Ziyad<br>
+      <em>Abdelaziz</em>
+    </h1>
+    <p class="hero-desc">
+      I extract, analyse, and automate data workflows that turn raw numbers into clear decisions. Working across AI, consulting, and enterprise data.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-dark">View Projects</a>
+      <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-scroll">Scroll to explore</div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Years experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Companies</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Certifications</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">B.Sc.</div>
+        <div class="stat-label">Economics & Math</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-head reveal">
+    <div class="section-num">01 / About</div>
+    <h2 class="section-title">Who I <em>am</em></h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I am a <strong>Data Analyst</strong> completing a B.Sc. in Economics and Mathematics at the University of Manitoba (expected August 2026). I work at the intersection of data analysis, AI automation, and business intelligence.</p>
+      <p>Across roles at <strong>TELUS</strong>, <strong>DLVR AI</strong>, and <strong>Focused Forward</strong>, I have built data pipelines, automated workflows, queried large databases, and delivered analytical insights that drive real decisions.</p>
+      <p>I also built <strong>Analyst Pro</strong> — a full-stack data analysis platform handling health, financial, and behavioural datasets with automated cleaning, AI-powered insights, and exportable reports.</p>
+    </div>
+    <div class="about-details reveal">
+      <div class="detail-row">
+        <div class="detail-label">Location</div>
+        <div class="detail-value">Winnipeg, MB, Canada</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-label">Education</div>
+        <div class="detail-value">B.Sc. Economics & Mathematics — University of Manitoba (Aug 2026)</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-label">Core Tools</div>
+        <div class="detail-value">Python, SQL, R, SAS, PostgreSQL</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-label">Speciality</div>
+        <div class="detail-value">Data pipelines, AI automation, analytics</div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-label">Contact</div>
+        <div class="detail-value">zeyadhussien21@gmail.com</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section section-bg" id="experience">
+  <div class="section-head reveal">
+    <div class="section-num">02 / Experience</div>
+    <h2 class="section-title">Where I've <em>worked</em></h2>
+  </div>
+  <div class="exp-list">
+    <div class="exp-card reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Aug 2025<br>— Present</div>
+        <div class="exp-loc">Remote</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-top">
+          <div class="exp-title">Data Analyst</div>
+          <a href="https://www.telus.com" class="exp-company" target="_blank">TELUS (Part-Time)</a>
+        </div>
+        <ul class="exp-bullets">
+          <li>Extract, validate, and quality-check large structured datasets to ensure accuracy and consistency across enterprise analytics operations.</li>
+          <li>Query relational databases using SQL to cross-reference datasets, identifying anomalies and integrity issues across multiple data sources.</li>
+          <li>Develop Python validation scripts to automate routine data quality checks, improving pipeline efficiency.</li>
+          <li>Produce standardized reports communicating findings to internal stakeholders.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-meta">
+        <div class="exp-date">Sep 2024<br>— May 2025</div>
+        <div class="exp-loc">Winnipeg, MB</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-top">
+          <div class="exp-title">Junior Data Analyst</div>
+          <a href="https://www.dlvrai.com/" class="exp-company" target="_blank">DLVR AI</a>
+        </div>
+        <ul class="exp-bullets">
+          <li>Extracted and linked large datasets from structured and unstructured sources to support AI-driven business intelligence solutions.</li>
+          <li>Designed and built data models and prototypes for client-facing dashboards and operational automation workflows.</li>
+          <li>Queried relational and non-relational databases using SQL and Python to retrieve, transform, and stage data for reporting.</li>
+          <li>Integrated AI-powered analytics into client operations, translating data into actionable recommendations.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-meta">
+        <div class="exp-date">May 2023<br>— Sep 2023</div>
+        <div class="exp-loc">Winnipeg, MB</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-top">
+          <div class="exp-title">Data Analyst</div>
+          <a href="https://www.focusedforward.ca/" class="exp-company" target="_blank">Focused Forward</a>
+        </div>
+        <ul class="exp-bullets">
+          <li>Analysed business workflows and operational data for SME clients, identifying inefficiencies and automation opportunities.</li>
+          <li>Built and maintained data pipelines to extract, clean, and link datasets from structured and unstructured sources.</li>
+          <li>Designed and deployed AI-powered automation agents to streamline repetitive data processing tasks.</li>
+          <li>Produced written reports and delivered verbal presentations to non-technical stakeholders.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-head reveal">
+    <div class="section-num">03 / Projects</div>
+    <h2 class="section-title">What I've <em>built</em></h2>
+  </div>
+  <div>
+    <div class="project-card reveal">
+      <div class="project-index">01</div>
+      <div class="project-body">
+        <div class="project-name">Analyst Pro</div>
+        <div class="project-stack">
+          <span class="tag">Python</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Next.js</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Claude API</span>
+          <span class="tag">GitHub Actions</span>
+        </div>
+        <p class="project-desc">A full-stack data analysis platform where users upload datasets across multiple domains including health and clinical data, financial records, and behavioural data — and receive cleaned, validated, analysis-ready output. Features automated cleaning pipelines with full audit trails, privacy-preserving access controls with role-based usage tracking, schema standardization workflows, and AI-generated insights with exportable PDF and Excel reports.</p>
+        <a href="https://github.com/zeyadElshazly1/Analyist-pro" target="_blank" class="project-link">View on GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section section-bg" id="skills">
+  <div class="section-head reveal">
+    <div class="section-num">04 / Skills</div>
+    <h2 class="section-title">What I <em>know</em></h2>
+  </div>
+  <div class="skills-table">
+    <div class="skill-row reveal">
+      <div class="skill-cat">Programming &amp; Scripting</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">R</span><span class="skill-tag">SAS</span><span class="skill-tag">pandas</span><span class="skill-tag">NumPy</span><span class="skill-tag">SQLAlchemy</span>
+      </div>
+    </div>
+    <div class="skill-row reveal">
+      <div class="skill-cat">Databases</div>
+      <div class="skill-tags">
+        <span class="skill-tag">PostgreSQL</span><span class="skill-tag">Relational DB Design</span><span class="skill-tag">ER Modelling</span><span class="skill-tag">Non-relational DBs</span><span class="skill-tag">Supabase</span><span class="skill-tag">Alembic</span>
+      </div>
+    </div>
+    <div class="skill-row reveal">
+      <div class="skill-cat">Data Analysis</div>
+      <div class="skill-tags">
+        <span class="skill-tag">EDA</span><span class="skill-tag">Data Extraction</span><span class="skill-tag">Data Linking</span><span class="skill-tag">Schema Design</span><span class="skill-tag">Customer Segmentation</span><span class="skill-tag">Pattern Recognition</span>
+      </div>
+    </div>
+    <div class="skill-row reveal">
+      <div class="skill-cat">Statistics</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Descriptive Statistics</span><span class="skill-tag">Regression</span><span class="skill-tag">Hypothesis Testing</span><span class="skill-tag">Frequency Analysis</span><span class="skill-tag">Econometrics</span>
+      </div>
+    </div>
+    <div class="skill-row reveal">
+      <div class="skill-cat">AI &amp; Automation</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Claude API</span><span class="skill-tag">Prompt Engineering</span><span class="skill-tag">Agentic Workflows</span><span class="skill-tag">Pipeline Automation</span><span class="skill-tag">AI Integration</span>
+      </div>
+    </div>
+    <div class="skill-row reveal">
+      <div class="skill-cat">Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git/GitHub</span><span class="skill-tag">Docker</span><span class="skill-tag">FastAPI</span><span class="skill-tag">Next.js</span><span class="skill-tag">GitHub Actions</span><span class="skill-tag">CI/CD</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section" id="certifications">
+  <div class="section-head reveal">
+    <div class="section-num">05 / Certifications</div>
+    <h2 class="section-title">What I've <em>earned</em></h2>
+  </div>
+  <div class="certs-list">
+    <div class="cert-row reveal">
+      <div class="cert-year">In Progress</div>
+      <div class="cert-name-wrap">
+        <div class="cert-name">Getting Started with SAS Programming</div>
+        <div class="cert-issuer">SAS Institute / Coursera</div>
+      </div>
+      <span class="cert-badge wip">In Progress</span>
+    </div>
+    <div class="cert-row reveal">
+      <div class="cert-year">2025</div>
+      <div class="cert-name-wrap">
+        <div class="cert-name">Google Data Analytics Professional Certificate</div>
+        <div class="cert-issuer">Google / Coursera</div>
+      </div>
+      <span class="cert-badge done">Completed</span>
+    </div>
+    <div class="cert-row reveal">
+      <div class="cert-year">2025</div>
+      <div class="cert-name-wrap">
+        <div class="cert-name">Claude AI Architecture Certification</div>
+        <div class="cert-issuer">Anthropic</div>
+      </div>
+      <span class="cert-badge done">Completed</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section section-bg" id="contact">
+  <div class="section-head reveal">
+    <div class="section-num">06 / Contact</div>
+    <h2 class="section-title">Let's <em>connect</em></h2>
+  </div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="contact-heading">Get in<br><em>touch</em></div>
+      <p class="contact-sub">Open to data analyst roles, consulting engagements, and collaborative projects. Reach out through any of the channels below.</p>
+      <a href="#contact" class="btn btn-dark">Say Hello</a>
+    </div>
+    <div class="contact-links reveal">
+      <a href="mailto:zeyadhussien21@gmail.com" class="contact-link-row">
+        <div>
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-val">zeyadhussien21@gmail.com</div>
+        </div>
+        <span class="contact-link-arrow">↗</span>
+      </a>
+      <a href="https://www.linkedin.com/in/ziyad-abdulaziz-212194293/" target="_blank" class="contact-link-row">
+        <div>
+          <div class="contact-link-label">LinkedIn</div>
+          <div class="contact-link-val">ziyad-abdulaziz-212194293</div>
+        </div>
+        <span class="contact-link-arrow">↗</span>
+      </a>
+      <a href="https://github.com/zeyadElshazly1" target="_blank" class="contact-link-row">
+        <div>
+          <div class="contact-link-label">GitHub</div>
+          <div class="contact-link-val">zeyadElshazly1</div>
+        </div>
+        <span class="contact-link-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-text">Ziyad Abdelaziz — Winnipeg, MB — 2026</span>
+  <span class="footer-text">Data Analyst</span>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
